@@ -13,6 +13,7 @@ public class Cafebezoek {
 
 	private Date datumBezoek;
 	private int aantalConsumpties;
+	private Cafe cafe;
 	
 	/**
 	 * Constructor
@@ -20,6 +21,7 @@ public class Cafebezoek {
 	public Cafebezoek(Cafe cafe)
 	{
 		datumBezoek = new Date();
+		this.cafe = cafe;
 		
 		Cafebezoeken.toevoegen(this);
 	}
