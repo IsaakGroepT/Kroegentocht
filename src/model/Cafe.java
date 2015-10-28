@@ -1,7 +1,7 @@
 package model;
 
 /**
- * @Autor: Isaak Malik, Michal dinges
+ * @Autor: Isaak Malik, Michal Mitkowsky
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
@@ -11,17 +11,20 @@ public class Cafe {
 
 	private Adres cafeAdres;
 	private CafeSoort cafeSoort;
+        private String cafeNaam;
 	
 	/**
 	 * Constructor
 	 * 
+         * @param cafeNaam
 	 * @param cafeAdres
 	 * @param cafeSoort
 	 */
-	public Cafe(Adres cafeAdres, CafeSoort cafeSoort)
+	public Cafe(String cafeNaam, Adres cafeAdres, CafeSoort cafeSoort)
 	{
 		this.cafeAdres = cafeAdres;
 		this.cafeSoort = cafeSoort;
+                this.cafeNaam = cafeNaam;
 	}
 	
 	/**
@@ -59,4 +62,23 @@ public class Cafe {
 	{
 		this.cafeSoort = cafeSoort;
 	}
+        
+        /**
+         * 
+         * @return 
+         */
+        public String getCafeNaam()
+        {
+            return cafeNaam;
+        }
+        
+        /**
+         * 
+         * @param cafeNaam
+         * @return 
+         */
+        public void setCafeNaam(String cafeNaam)
+        {
+            this.cafeNaam = cafeNaam;
+        }
 }

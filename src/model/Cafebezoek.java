@@ -1,28 +1,27 @@
 package model;
 
-import java.util.Date;
-
 /**
- * @Autor: Isaak Malik, Michal dinges
+ * @Autor: Isaak Malik, Michal Mitkowsky
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
  * @Purpose: Cafébezoeken bijhouden om een idee te krijgen van alcoholverslaving
  */
-public class Cafebezoek {
+public class Cafebezoek extends DatumTijd {
 
-	private Date datumBezoek;
 	private int aantalConsumpties;
 	private Cafe cafe;
 	
 	/**
-	 * Constructor
+	 * 
+	 * @param cafe 
 	 */
 	public Cafebezoek(Cafe cafe)
 	{
-		datumBezoek = new Date();
+		// Tijd registreren
+		new DatumTijd();
 		this.cafe = cafe;
-		
+
 		Cafebezoeken.toevoegen(this);
 	}
 	
