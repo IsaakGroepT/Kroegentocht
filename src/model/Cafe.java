@@ -11,12 +11,12 @@ public class Cafe {
 
 	private Adres cafeAdres;
 	private CafeSoort cafeSoort;
-        private String cafeNaam;
+	private String cafeNaam;
 	
 	/**
 	 * Constructor
 	 * 
-         * @param cafeNaam
+	 * @param cafeNaam
 	 * @param cafeAdres
 	 * @param cafeSoort
 	 */
@@ -24,7 +24,10 @@ public class Cafe {
 	{
 		this.cafeAdres = cafeAdres;
 		this.cafeSoort = cafeSoort;
-                this.cafeNaam = cafeNaam;
+		this.cafeNaam = cafeNaam;
+		
+		//Toevoegen aan lijst
+		CafeLijst.toevoegen(this);
 	}
 	
 	/**
@@ -63,22 +66,22 @@ public class Cafe {
 		this.cafeSoort = cafeSoort;
 	}
         
-        /**
-         * 
-         * @return 
-         */
-        public String getCafeNaam()
-        {
-            return cafeNaam;
-        }
-        
-        /**
-         * 
-         * @param cafeNaam
-         * @return 
-         */
-        public void setCafeNaam(String cafeNaam)
-        {
-            this.cafeNaam = cafeNaam;
-        }
+	/**
+	 * 
+	 * @return 
+	 */
+	public String getCafeNaam()
+	{
+		return cafeNaam;
+	}
+	
+	/**
+	 * 
+	 * @param cafeNaam
+	 * @return 
+	 */
+	public void setCafeNaam(String cafeNaam)
+	{
+		this.cafeNaam = cafeNaam;
+	}
 }
