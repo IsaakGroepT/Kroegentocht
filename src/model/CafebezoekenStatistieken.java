@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Autor: Isaak Malik, Michal Mitkowsky
@@ -23,36 +24,88 @@ public class CafebezoekenStatistieken extends Cafebezoeken {
 	
 	/**
 	 * 
-	 * @return Object van langste cafébezoek
+	 * @return
 	 */
-	public Cafebezoek toonLangsteBezoek()
+	public Cafebezoek langsteCafebezoek()
 	{
-		Cafebezoek langsteCafeBezoek = null;
-		long tijdLangsteBezoek = 0;
-		long verschilInTijd;
+		Cafebezoek huidigeLangsteCafebezoek = null;
 		
 		for (int n = 0; n < cafebezoeken.size(); n++)
 		{
-			verschilInTijd = cafebezoeken.get(n).getTotaleTijdVanBezoek();
-			
-			if (langsteCafeBezoek != null || tijdLangsteBezoek < verschilInTijd)
+			if (huidigeLangsteCafebezoek == null || 
+					huidigeLangsteCafebezoek.getTotaleTijdVanBezoek() < 
+					cafebezoeken.get(n).getTotaleTijdVanBezoek())
 			{
-				langsteCafeBezoek = cafebezoeken.get(n);
-				tijdLangsteBezoek = verschilInTijd;
+				huidigeLangsteCafebezoek = cafebezoeken.get(n);
 			}
 		}
-		return langsteCafeBezoek;
+		return huidigeLangsteCafebezoek;
 	}
 	
 	/**
 	 * 
-	 * @param datum1
-	 * @param datum2 
+	 * @param cafe
+	 * @return
 	 */
-	public void laadCafebezoekenVolgensPeriode(Date minDatum, Date maxDatum)
+	public int gemiddeldAantalConsumptiesPerCafe(Cafe cafe)
 	{
-		ArrayList gefilterdeCafebezoeken = new ArrayList();
-		DatumTijd huidigeTijd;
+		int aantalBezoeken = 0;
+		int aantalConsumpties = 0;
+		
+		for (int n = 0; n < cafebezoeken.size(); n++)
+		{
+			if (cafe == cafebezoeken.get(n).getCafe())
+			{
+				aantalBezoeken++;
+				aantalConsumpties += cafebezoeken.get(n).getAantalConsumpties();
+			}
+		}
+		return aantalConsumpties / aantalBezoeken;
+	}
+	
+	/**
+	 * 
+	 * @param minDatum
+	 * @param maxDatum
+	 * @return
+	 */
+	public int aantalConsumptiesPerPeriode(Date minDatum, Date maxDatum)
+	{
+		int aantalConsumpties = 0;
+		
+		for (int n = 0; n < cafebezoeken.size(); n++)
+		{
+			aantalConsumpties += cafebezoeken.get(n).getAantalConsumpties();
+		}
+		return aantalConsumpties;
+	}
+	
+	/**
+	 * 
+	 * @param minDatum
+	 * @param maxDatum
+	 * @return
+	 */
+	public int aantalMinutenVolgensPeriode(Date minDatum, Date maxDatum)
+	{
+		int tijd = 0;
+		
+		for (int n = 0; n < cafebezoeken.size(); n++)
+		{
+			tijd += cafebezoeken.get(n).getTotaleTijdVanBezoek();
+		}
+		return (int) TimeUnit.MILLISECONDS.toMinutes(tijd);
+	}
+	
+	/**
+	 * 
+	 * @param minDatum
+	 * @param maxDatum
+	 * @return
+	 */
+	public ArrayList<Cafebezoek> aantalCafebezoekenVolgensPeriode(Date minDatum, Date maxDatum)
+	{
+		ArrayList<Cafebezoek> gefilterdeCafebezoeken = new ArrayList<Cafebezoek>();
 		
 		for (int n = 0; n < cafebezoeken.size(); n++)
 		{
@@ -62,5 +115,7 @@ public class CafebezoekenStatistieken extends Cafebezoeken {
 				gefilterdeCafebezoeken.add(cafebezoeken.get(n));
 			}
 		}
+		
+		return gefilterdeCafebezoeken;
 	}
 }

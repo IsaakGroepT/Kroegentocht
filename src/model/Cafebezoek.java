@@ -41,4 +41,13 @@ public class Cafebezoek extends DatumTijd {
 	{
 		aantalConsumpties++;
 	}
+	
+	/**
+	 * Geeft de cafe terug die bezocht is
+	 * @return
+	 */
+	public Cafe getCafe()
+	{
+		return cafe;
+	}
 }
