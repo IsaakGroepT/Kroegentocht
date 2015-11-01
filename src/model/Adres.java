@@ -1,7 +1,7 @@
 package model;
 
 /**
- * @Autor: Isaak Malik, Michal Mitkowsky
+ * @Autor: x
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
@@ -66,7 +66,7 @@ public class Adres {
 	/**
 	 * @return the zipCode
 	 */
-	public String getZipCode() {
+	public String getPostcode() {
 		return zipCode;
 	}
 
@@ -74,7 +74,7 @@ public class Adres {
 	 * @param zipCode
 	 *            the zipCode to set
 	 */
-	public void setZipCode(String zipCode) {
+	public void setPostcode(String zipCode) {
 		this.zipCode = zipCode;
 	}
 
@@ -155,7 +155,7 @@ public class Adres {
 
 	public String toString() {
 		return String.format("%s %s bus %s\n%s %s\n%s\nTel.: %s\nGsm.: %s\nFax: %s", getStreet(), getNumber(), getBox(),
-				getZipCode(), getCity(), getEmail(), getPhone(),
+				getPostcode(), getCity(), getEmail(), getPhone(),
 				getMobilePhone(), getFax());
 	}
 }
