@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @Project: KroegenTocht
  * @Purpose: Lijst van cafébezoeken met alle gegevens
  */
-public class Cafebezoeken {
+public class CafebezoekLijst {
 
 	protected static ArrayList<Cafebezoek> cafebezoeken = new ArrayList<Cafebezoek>();
 	

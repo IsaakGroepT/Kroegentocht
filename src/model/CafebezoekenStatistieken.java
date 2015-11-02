@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @Project: KroegenTocht
  * @Purpose: Gegevens extraheren van cafébezoek objecten uit cafébezoeken
  */
-public class CafebezoekenStatistieken extends Cafebezoeken {
+public class CafebezoekenStatistieken extends CafebezoekLijst {
 
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class CafebezoekenStatistieken extends Cafebezoeken {
 	 */
 	public static int totaalAantal()
 	{
-		return cafebezoeken.size();
+		return Cafebezoeken.size();
 	}
 	
 	/**

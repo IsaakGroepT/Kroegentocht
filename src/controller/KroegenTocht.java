@@ -17,6 +17,14 @@ public class KroegenTocht {
 
 	public static void main(String[] args)
 	{
+		setVoorbeelden();
+	}
+	
+	/**
+	 * Stel enkele gegevens van adressen en cafes in om te beginnen
+	 */
+	public void setVoorbeelden()
+	{
 		Adres adres1 = new Adres();
 		adres1.setStreet("lolstraat");
 		adres1.setNumber("4");

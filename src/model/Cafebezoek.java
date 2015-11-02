@@ -24,7 +24,7 @@ public class Cafebezoek extends DatumTijd {
 		this.cafe = cafe;
 		isInCafe = true;
 
-		Cafebezoeken.toevoegen(this);
+		CafebezoekLijst.toevoegen(this);
 	}
 	
 	/**
