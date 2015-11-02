@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Autor: Isaak Malik, Michal Mitkowsky
+ * @Autor: Isaak Malik, Michal Mytkowski
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
@@ -19,7 +19,7 @@ public class CafebezoekenStatistieken extends CafebezoekLijst {
 	 */
 	public static int totaalAantal()
 	{
-		return Cafebezoeken.size();
+		return cafebezoeken.size();
 	}
 	
 	/**

@@ -7,7 +7,7 @@ import model.Cafebezoek;
 import model.CafebezoekenStatistieken;
 
 /**
- * @Autor: Isaak Malik, Michal Mitkowsky
+ * @Autor: Isaak Malik, Michal Mytkowski
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
@@ -23,7 +23,7 @@ public class KroegenTocht {
 	/**
 	 * Stel enkele gegevens van adressen en cafes in om te beginnen
 	 */
-	public void setVoorbeelden()
+	public static void setVoorbeelden()
 	{
 		Adres adres1 = new Adres();
 		adres1.setStreet("lolstraat");

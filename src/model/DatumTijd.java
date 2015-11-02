@@ -4,7 +4,7 @@ package model;
 import java.util.Date;
 
 /**
- * @Autor: Isaak Malik, Michal Mitkowsky
+ * @Autor: Isaak Malik, Michal Mytkowski
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
