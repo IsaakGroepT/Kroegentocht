@@ -35,7 +35,7 @@ public class CafebezoekTest {
 	{
 		if (!setUpGedaan)
 		{
-			// Cafés aanmaken, zelfde adres want maakt in deze tests niet uit
+			// Cafï¿½s aanmaken, zelfde adres want maakt in deze tests niet uit
 			Adres adres = new Adres();
 			adres.setCity("Brussel");
 			adres.setNumber("1A");

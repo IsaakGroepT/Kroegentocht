@@ -8,7 +8,7 @@ import java.util.Date;
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
- * @Purpose: Tijdregistratie van cafébezoeken
+ * @Purpose: Tijdregistratie van cafÃ©bezoeken
  */
 public class DatumTijd {
     
