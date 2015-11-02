@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class CafeLijst {
 
-	private static ArrayList<Cafe> cafes = new ArrayList<Cafe>();
+	private static ArrayList<Cafe> cafes = new ArrayList<>();
 	
 	/**
 	 * 
