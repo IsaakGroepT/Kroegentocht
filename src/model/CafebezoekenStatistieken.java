@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
- * @Purpose: Gegevens extraheren van cafÃ©bezoek objecten uit cafÃ©bezoeken
+ * @Purpose: Gegevens extraheren van cafébezoek objecten uit cafébezoeken
  */
 public class CafebezoekenStatistieken extends CafebezoekLijst {
 

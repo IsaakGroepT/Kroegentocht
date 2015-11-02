@@ -5,7 +5,7 @@ package model;
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
- * @Purpose: Adres object voor cafÃ©s
+ * @Purpose: Adres object voor cafés
  */
 public class Adres {
 	private String street;

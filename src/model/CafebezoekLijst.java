@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
- * @Purpose: Lijst van cafÃ©bezoeken met alle gegevens
+ * @Purpose: Lijst van cafébezoeken met alle gegevens
  */
 public class CafebezoekLijst {
 

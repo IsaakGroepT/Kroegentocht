@@ -5,7 +5,7 @@ package model;
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
- * @Purpose: Soorten cafÃ©s
+ * @Purpose: Soorten cafés
  */
 public enum CafeSoort {
 	
