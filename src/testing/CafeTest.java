@@ -9,6 +9,13 @@ import model.Adres;
 import model.Cafe;
 import model.CafeSoort;
 
+/**
+ * @Autor: Isaak Malik, Michal Mitkowsky
+ * @Team: Team29
+ * @Date: 25/10/2015
+ * @Project: KroegenTocht
+ * @Purpose: Cafe testen
+ */
 public class CafeTest {
 
 	private Cafe cafe;

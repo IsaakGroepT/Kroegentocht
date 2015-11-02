@@ -7,6 +7,13 @@ import org.junit.Test;
 
 import model.Adres;
 
+/**
+ * @Autor: Isaak Malik, Michal Mitkowsky
+ * @Team: Team29
+ * @Date: 25/10/2015
+ * @Project: KroegenTocht
+ * @Purpose: Adres object testen
+ */
 public class AdresTest {
 	
 	private Adres adres;

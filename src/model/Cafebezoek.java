@@ -11,6 +11,7 @@ public class Cafebezoek extends DatumTijd {
 
 	private int aantalConsumpties;
 	private Cafe cafe;
+	private boolean isInCafe = false;
 	
 	/**
 	 * 
@@ -21,6 +22,7 @@ public class Cafebezoek extends DatumTijd {
 		// Tijd registreren
 		new DatumTijd();
 		this.cafe = cafe;
+		isInCafe = true;
 
 		Cafebezoeken.toevoegen(this);
 	}
@@ -49,5 +51,23 @@ public class Cafebezoek extends DatumTijd {
 	public Cafe getCafe()
 	{
 		return cafe;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean zijnWeOpCafe()
+	{
+		return isInCafe;
+	}
+	
+	/**
+	 * 
+	 */
+	public void eindeVanCafebezoek()
+	{
+		eindeBezoek();
+		isInCafe = false;
 	}
 }

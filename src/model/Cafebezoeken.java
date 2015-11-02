@@ -21,4 +21,14 @@ public class Cafebezoeken {
 	{
 		cafebezoeken.add(cafebezoek);
 	}
+	
+	/**
+	 * Onder anderen voor de JUnit testen
+	 * 
+	 * @return
+	 */
+	public static ArrayList<Cafebezoek> getCafebezoeken()
+	{
+		return cafebezoeken;
+	}
 }
