@@ -1,0 +1,41 @@
+.root {
+    -fx-background-image: url("images/Beer-Pattern-PPT-Backgrounds.jpg")
+;
+    -fx-background-size: 400px 450px;
+}
+
+.label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+#welcome-text{
+    -fx-background-color: lightsalmon;
+    -fx-padding: 10px;
+
+    -fx-font-size: 15px;
+
+
+}
+
+#statsLabel {
+
+    -fx-text-fill: crimson;
+}
+
+
+.button {
+    -fx-background-color: crimson;
+    -fx-font-size: 13px;
+    -fx-border-radius: 4px;
+    -fx-effect: dropshadow(three-pass-box, crimson, 5, 0.0, 0, 1);
+    -fx-min-width: 100%;
+    -fx-alignment: center;
+
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#FF134B,#FD784C);
+}
