@@ -11,7 +11,7 @@ import model.Adres;
 import model.Cafe;
 import model.CafeSoort;
 import model.Cafebezoek;
-import model.Cafebezoeken;
+
 import model.CafebezoekenStatistieken;
 
 /**

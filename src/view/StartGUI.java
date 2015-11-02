@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Cafe;
 import model.Cafebezoek;
 
 
@@ -113,11 +114,11 @@ public class StartGUI extends Application {
 
     }
 
-    public  void cafebezoekScene(){ //parameters : String title,String cafeNaam, Cafe cafe
+    public  void cafebezoekScene(String title,String cafeNaam, Cafe cafe){
 
-        //cafebezoek = new Cafebezoek(cafe);
+        Cafebezoek cafebezoek = new Cafebezoek(cafe);
 
-        window.setTitle("testing");
+        window.setTitle(title);
 
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
@@ -125,7 +126,7 @@ public class StartGUI extends Application {
         gridPane.setVgap(10);
         gridPane.setHgap(10);
 
-        Text cafeNaamText = new Text("cafeNaam"); //cafeNaam
+        Text cafeNaamText = new Text(cafeNaam); //cafeNaam
         cafeNaamText.setId("cafe-naam");
         gridPane.add(cafeNaamText, 1, 0);
 
@@ -142,7 +143,7 @@ public class StartGUI extends Application {
         Button drinkButton = new Button("+1");
         drinkButton.setId("drink-button");
         drinkButton.setShape(new Circle(30));
-        drinkButton.setOnAction(e -> Cafebezoek.());
+        drinkButton.setOnAction(e -> cafebezoek.verhoogAantalConsumpties());
         gridPane.add(drinkButton, 1, 3);
 
         Label aantalConsumptiesLabel = new Label(); //observable.
