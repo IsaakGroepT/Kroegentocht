@@ -76,10 +76,9 @@ public class Cafe {
 	}
 	
 	/**
-	 * 
-	 * @param cafeNaam
-	 * @return 
-	 */
+         * 
+         * @param cafeNaam 
+         */
 	public void setCafeNaam(String cafeNaam)
 	{
 		this.cafeNaam = cafeNaam;

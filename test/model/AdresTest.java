@@ -1,11 +1,9 @@
-package testing;
+package model;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import model.Adres;
 
 /**
  * @Autor: Isaak Malik, Michal Mytkowski
