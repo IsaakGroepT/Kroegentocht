@@ -94,12 +94,16 @@ public class AlertBox {
 
 		Button btnExit = new Button("Close");
 		hBtn.getChildren().add(btnExit);
-		btnExit.setOnAction(e -> scherm.close());
+		btnExit.setOnAction((ActionEvent e) ->
+		{
+			scherm.close();
+		});
 		gridPaneel.add(btnExit, 4, 4);
 
-		gridPaneel.setHalignment(lblNaam, HPos.RIGHT);
-		gridPaneel.setHalignment(lblAdres, HPos.RIGHT);
-		gridPaneel.setHalignment(lblSoort, HPos.RIGHT);
+		// GridPane ipv gridPaneel want is statische methode, gridPaneel is een geïnstantieerd object
+		GridPane.setHalignment(lblNaam, HPos.RIGHT);
+		GridPane.setHalignment(lblAdres, HPos.RIGHT);
+		GridPane.setHalignment(lblSoort, HPos.RIGHT);
 
 		Scene toevoegenCafeScene = new Scene(gridPaneel);
 		scherm.setScene(toevoegenCafeScene);
@@ -107,7 +111,7 @@ public class AlertBox {
 	}
 	
 	/**
-	 * 
+	 * Wanneer er op de startknop gedrukt wordt, maken we een bezoek aan een café
 	 * @param title 
 	 */
 	public static void kiesStartCafeScene(String title)
@@ -126,9 +130,15 @@ public class AlertBox {
 		gridPaneel.add(lblKies, 2, 0);
 		lblKies.setAlignment(Pos.CENTER);
 
-		/*ComboBox<String> cmboxCafes = new ComboBox<>();
-		cmboxCafes.getItems().setAll(CafeLijst.getCafeNamen());
-		gridPaneel.add(cmboxCafes, 2, 3);*/
+		// Lijst van cafés toevoegen aan de combobox
+		ComboBox<String> cmboxCafes = new ComboBox<>();
+		
+		for (int n = 0; n < CafeLijst.getCafes().size(); n++)
+		{
+			// TODO: hoe weet de combobox de index (of reference) van het cafe object
+			cmboxCafes.getItems().add(CafeLijst.getCafes().get(n).getCafeNaam());
+		}
+		gridPaneel.add(cmboxCafes, 2, 3);
 
 		Button btnGo = new Button("GO!");
 		btnGo.setShape(new Circle(100));
@@ -140,13 +150,14 @@ public class AlertBox {
 		 */
 		btnGo.setOnAction((ActionEvent e) ->
 		{
-			/*String cafeNaam = cmboxCafes.getValue();
+			String cafeNaam = cmboxCafes.getValue();
 			cafebezoekScene("Cafe Bezoek", cafeNaam, CafeLijst.getCafeUitLijst(cafeNaam));
-			scherm.close();*/
+			scherm.close();
 		} );
 
 		Scene cafeKiezen = new Scene(gridPaneel);
 		scherm.setScene(cafeKiezen);
+		scherm.show();
 	}
 	
 	/**
@@ -155,7 +166,7 @@ public class AlertBox {
 	 * @param cafeNaam
 	 * @param cafe 
 	 */
-	public  static void cafebezoekScene(String title,String cafeNaam, Cafe cafe)
+	public  static void cafebezoekScene(String title, String cafeNaam, Cafe cafe)
 	{
 		Cafebezoek cafebezoek = new Cafebezoek(cafe);
 		Stage scherm = new Stage();
