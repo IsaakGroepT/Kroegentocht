@@ -5,6 +5,7 @@ import model.Cafe;
 import model.CafeSoort;
 import model.Cafebezoek;
 import model.CafebezoekenStatistieken;
+import view.StartGUI;
 
 /**
  * @Autor: Isaak Malik, Michal Mytkowski
@@ -18,6 +19,9 @@ public class KroegenTocht {
 	public static void main(String[] args)
 	{
 		setVoorbeelden();
+		
+		// Lanceer de JavaFX GUI
+		StartGUI.launch(StartGUI.class, args);
 	}
 	
 	/**
