@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Kroegentocht.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StartGUI">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="25.0" stylesheets="@Kroegentocht.css" BorderPane.alignment="CENTER">
+         <children>
+            <Button maxWidth="200.0" mnemonicParsing="false" styleClass="homeButtons" text="START" />
+            <Button layoutX="10.0" layoutY="10.0" maxWidth="200.0" mnemonicParsing="false" styleClass="homeButtons" text="TOEVOEGEN CAFE" />
+            <Button layoutX="10.0" layoutY="35.0" maxWidth="200.0" mnemonicParsing="false" styleClass="homeButtons" text="STATS" />
+            <Button layoutX="10.0" layoutY="60.0" maxWidth="200.0" mnemonicParsing="false" styleClass="homeButtons" text="EXIT" />
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <Text fill="#f89924" stroke="#141313" strokeType="OUTSIDE" text="KROEGENTOCHT" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Impact" size="40.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+   </top>
+</BorderPane>

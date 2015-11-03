@@ -1,11 +1,11 @@
 package model;
 
 /**
- * @Autor: Isaak Malik, Michal Mitkowsky
+ * @Autor: Isaak Malik, Michal Mytkowski
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
- * @Purpose: Cafébezoeken bijhouden om een idee te krijgen van alcoholverslaving
+ * @Purpose: Soorten cafés
  */
 public enum CafeSoort {
 	

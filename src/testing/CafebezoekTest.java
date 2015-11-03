@@ -11,11 +11,11 @@ import model.Adres;
 import model.Cafe;
 import model.CafeSoort;
 import model.Cafebezoek;
-
+import model.CafebezoekLijst;
 import model.CafebezoekenStatistieken;
 
 /**
- * @Autor: Isaak Malik, Michal Mitkowsky
+ * @Autor: Isaak Malik, Michal Mytkowski
  * @Team: Team29
  * @Date: 25/10/2015
  * @Project: KroegenTocht
@@ -35,7 +35,7 @@ public class CafebezoekTest {
 	{
 		if (!setUpGedaan)
 		{
-			// Cafés aanmaken, zelfde adres want maakt in deze tests niet uit
+			// Cafï¿½s aanmaken, zelfde adres want maakt in deze tests niet uit
 			Adres adres = new Adres();
 			adres.setCity("Brussel");
 			adres.setNumber("1A");
@@ -85,9 +85,9 @@ public class CafebezoekTest {
 	@Test
 	public void test_CafebezoekEnCafebezoekenArray_GeeftZelfdeTerug()
 	{
-		assertEquals(cafebezoek1, Cafebezoeken.getCafebezoeken().get(0));
-		assertEquals(cafebezoek2, Cafebezoeken.getCafebezoeken().get(1));
-		assertEquals(cafebezoek3, Cafebezoeken.getCafebezoeken().get(2));
+		assertEquals(cafebezoek1, CafebezoekLijst.getCafebezoeken().get(0));
+		assertEquals(cafebezoek2, CafebezoekLijst.getCafebezoeken().get(1));
+		assertEquals(cafebezoek3, CafebezoekLijst.getCafebezoeken().get(2));
 	}
 	
 	@Test
