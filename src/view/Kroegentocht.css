@@ -1,5 +1,5 @@
 .root {
-    -fx-background-image: url("images/Beer-Pattern-PPT-Backgrounds.jpg")
+    -fx-background-image: url("resources/Beer-Pattern-1.jpg")
 ;
     -fx-background-size: 400px 450px;
 }
@@ -11,13 +11,13 @@
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
 
-#welcome-text{
-    -fx-background-color: lightsalmon;
+#welcomeText{
+
     -fx-padding: 10px;
-
-    -fx-font-size: 15px;
-
-
+    -fx-text-fill: #FD784C;
+    -fx-font-size: 25px;
+    -fx-stroke: black;
+    -fx-stroke-width: 1px;
 }
 
 #statsLabel {

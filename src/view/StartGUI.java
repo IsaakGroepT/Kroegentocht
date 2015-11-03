@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -31,7 +32,7 @@ public class StartGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        KroegenTocht.setVoorbeelden();
         window = primaryStage;
         window.setTitle("Kroegentocht");
 
@@ -57,8 +58,8 @@ public class StartGUI extends Application {
          * and
          * Adding to GridPane
          */
-        Text welcomeText = new Text("LET THE DRUNKENGAMES BEGIN");
-        welcomeText.setId("welcome-text");
+        Text welcomeText = new Text("KROEGENTOCHT");
+        welcomeText.setId("welcomeText");
         gridPane.add(welcomeText, 2, 0);
 
 
@@ -114,57 +115,7 @@ public class StartGUI extends Application {
 
     }
 
-    public  void cafebezoekScene(String title,String cafeNaam, Cafe cafe){
 
-        Cafebezoek cafebezoek = new Cafebezoek(cafe);
-
-        window.setTitle(title);
-
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setPadding(new Insets(20, 20, 20, 20));
-        gridPane.setVgap(10);
-        gridPane.setHgap(10);
-
-        Text cafeNaamText = new Text(cafeNaam); //cafeNaam
-        cafeNaamText.setId("cafe-naam");
-        gridPane.add(cafeNaamText, 1, 0);
-
-        /**
-         * timer komt hier
-         */
-
-        Label timerField = new Label("00:01");
-        timerField.setId("Timer");
-
-
-        gridPane.add(timerField, 2, 2);
-
-        Button drinkButton = new Button("+1");
-        drinkButton.setId("drink-button");
-        drinkButton.setShape(new Circle(30));
-        drinkButton.setOnAction(e -> cafebezoek.verhoogAantalConsumpties());
-        gridPane.add(drinkButton, 1, 3);
-
-        Label aantalConsumptiesLabel = new Label(); //observable.
-        //      aantalConsumptiesLabel.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
-        gridPane.add(aantalConsumptiesLabel, 3, 3);
-
-        Button stoppedDrinking = new Button("STOP");
-        /* stoppedDrinking.setOnAction(e->{
-            cafebezoek.eindeBezoek();
-            AlertBox.eindeBezoekScene("STATS", cafebezoek.getBeginTijd(), cafebezoek.getEindTijd(), cafebezoek.getTotaleTijdVanBezoek(),cafebezoek.getAantalConsumpties());
-            cafebezoeken.toevoegenCafebezoek(cafebezoek);
-            window.close();
-        });
-        */
-
-        Scene cafeBezoekScene = new Scene(gridPane);
-        window.setScene(cafeBezoekScene);
-        window.show();
-
-
-    }
 
 
 

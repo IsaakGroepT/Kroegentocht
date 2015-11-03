@@ -1,5 +1,7 @@
 package view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,10 +15,11 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Adres;
-import model.Cafe;
-import model.CafeLijst;
-import model.CafeSoort;
+import model.*;
+import java.util.Date;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -77,9 +80,10 @@ public class AlertBox {
             buttonToevoegen.setOnAction(e -> {
                 Adres cafeAdres = new Adres();
                 cafeAdres.setStreet(textField_CafeAdres.getText());
-                Cafe cafe = new Cafe(textField_CafeNaam.getText(), cafeAdres, comboBox_CafeSoort.getValue());
-                CafeLijst.toevoegen(cafe);
+                new Cafe(textField_CafeNaam.getText(), cafeAdres, comboBox_CafeSoort.getValue());
+
                 alert.show();
+
             });
 
 
@@ -117,11 +121,12 @@ public class AlertBox {
             label1.setAlignment(Pos.CENTER);
 
             ComboBox<String>cafes = new ComboBox<>();
-           // cafes.getItems().setAll(CafeLijst.getCafes()); // Nakijken!!!!
+            cafes.getItems().setAll(CafeLijst.getCafeNamen());
+
             formLayout.add(cafes, 2, 3);
 
             Button buttonGO = new Button("GO!");
-            buttonGO.setShape(new Circle(35.0));
+            buttonGO.setShape(new Circle(100));
             formLayout.add(buttonGO, 2, 5);
 
             /**
@@ -131,11 +136,13 @@ public class AlertBox {
              *
              */
 
-            buttonGO.setOnAction(e -> window.close());
+            buttonGO.setOnAction(e -> {
+                String cafeNaam = cafes.getValue();
+                cafebezoekScene("Cafe Bezoek", cafeNaam,CafeLijst.getCafeUitLijst(cafeNaam));
+                window.close();
+            } );
 
-        /*{
-            // window.show(StartGUI.cafeBezoekScene());
-        });*/
+
 
             Scene chooseCafe = new Scene(formLayout);
             window.setScene(chooseCafe);
@@ -144,8 +151,67 @@ public class AlertBox {
 
         }
 
+    public  static void cafebezoekScene(String title,String cafeNaam, Cafe cafe){
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        Cafebezoek cafebezoek = new Cafebezoek(cafe);
 
-        public static void eindeBezoekScene(String title, long beginTijd, long eindTijd, double  totaleTijd,int totaalaantalConsumpties){
+        window.setTitle(title);
+        window.setMinWidth(350);
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setPadding(new Insets(20, 20, 20, 20));
+        gridPane.setVgap(10);
+        gridPane.setHgap(10);
+
+        Text cafeNaamText = new Text(cafeNaam);
+        cafeNaamText.setId("cafe-naam");
+        gridPane.add(cafeNaamText, 1, 0);
+
+        /**
+         * timer komt hier
+         */
+
+        Label timerField = new Label("00:01");
+        timerField.setId("Timer");
+
+
+        gridPane.add(timerField, 2, 2);
+
+
+        Label aantalConsumptiesLabel = new Label(); //observable.
+        //      aantalConsumptiesLabel.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
+        gridPane.add(aantalConsumptiesLabel, 3, 3);
+        Button drinkButton = new Button("+1");
+        drinkButton.setId("drink-button");
+        drinkButton.setShape(new Circle(30));
+        drinkButton.setOnAction(e -> {
+            cafebezoek.verhoogAantalConsumpties();
+            aantalConsumptiesLabel.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
+        });
+        gridPane.add(drinkButton, 1, 3);
+
+
+
+        Button stoppedDrinking = new Button("STOP");
+        stoppedDrinking.setOnAction(e->{
+            cafebezoek.eindeBezoek();
+            AlertBox.eindeBezoekScene("STATS", cafebezoek.getBeginTijd(), cafebezoek.getEindTijd(), cafebezoek.getTotaleTijdVanBezoek(),cafebezoek.getAantalConsumpties());
+            CafebezoekLijst.toevoegen(cafebezoek);
+            window.close();
+        });
+
+        gridPane.add(stoppedDrinking,4,5);
+
+        Scene cafeBezoekScene = new Scene(gridPane);
+        window.setScene(cafeBezoekScene);
+        window.show();
+
+
+    }
+
+
+        public static void eindeBezoekScene(String title, Date beginTijd, Date eindTijd, double  totaleTijd,int totaalaantalConsumpties){
             Stage window = new Stage();
             window.initModality(Modality.APPLICATION_MODAL);
             window.setTitle(title);
@@ -162,27 +228,27 @@ public class AlertBox {
 
             Label lbl1 = new Label("Begin tijd: ");
             formLayout.add(lbl1, 0, 1);
-            Label beginTijdLabel = new Label(Long.toString(beginTijd));
+            Label beginTijdLabel = new Label(beginTijd.toString());
             beginTijdLabel.setId("statsLabel");
             formLayout.add(beginTijdLabel, 1, 1);
 
             Label lbl2 = new Label("Eind tijd: ");
             formLayout.add(lbl2, 0, 2);
-            Label eindTijdLabel = new Label(Long.toString(eindTijd));
+            Label eindTijdLabel = new Label(eindTijd.toString());
             eindTijdLabel.setId("statsLabel");
-            formLayout.add(beginTijdLabel, 1, 2);
+            formLayout.add(eindTijdLabel, 1, 2);
 
             Label lbl3 = new Label("Totale tijd: ");
             formLayout.add(lbl3, 0, 3);
             Label totaleTijdLabel = new Label(Double.toString(totaleTijd));
             eindTijdLabel.setId("statsLabel");
-            formLayout.add(beginTijdLabel, 1, 3);
+            formLayout.add(totaleTijdLabel, 1, 3);
 
             Label lbl4 = new Label("Aantal consumpties: ");
             formLayout.add(lbl4, 0, 4);
-            Label totaalAantalConsumptiesLabel = new Label(Long.toString(totaalaantalConsumpties));
+            Label totaalAantalConsumptiesLabel = new Label(Integer.toString(totaalaantalConsumpties));
             eindTijdLabel.setId("statsLabel");
-            formLayout.add(beginTijdLabel, 1, 4);
+            formLayout.add(totaalAantalConsumptiesLabel, 1, 4);
 
 
             Button buttonOK = new Button("OK");
@@ -194,12 +260,9 @@ public class AlertBox {
             window.setScene(statScene);
             window.show();
 
-
-
-
-
-
         }
+
+
 
 
 

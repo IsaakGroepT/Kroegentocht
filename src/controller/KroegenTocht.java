@@ -5,6 +5,7 @@ import model.Cafe;
 import model.CafeSoort;
 import model.Cafebezoek;
 import model.CafebezoekenStatistieken;
+import view.StartGUI;
 
 /**
  * @Autor: Isaak Malik, Michal Mytkowski
@@ -15,10 +16,10 @@ import model.CafebezoekenStatistieken;
  */
 public class KroegenTocht {
 
-	public static void main(String[] args)
-	{
-		setVoorbeelden();
-	}
+	public void KroegenTocht(){setVoorbeelden();}
+
+
+
 	
 	/**
 	 * Stel enkele gegevens van adressen en cafes in om te beginnen
@@ -55,8 +56,25 @@ public class KroegenTocht {
 		Cafe cafe3 = new Cafe("Cafe dumbo", adres3, CafeSoort.STUDENTENCAFE);
 		Cafe cafe4 = new Cafe("Club mama", adres4, CafeSoort.CLUB);
 		Cafe cafe5 = new Cafe("Club dodo", adres5, CafeSoort.CLUB);
-		
+
+		/*
+		Wanneer deze constructor wordt opgeroepen, start er ook een timer, wat niet de bedoeling is.
+
+		Constructor van Cafebezoek=
+		Cafebezoek(cafe){
+
+		new DatumTijd();
+		this.cafe = cafe;
+		isInCafe = true; -->  in dit geval niet, want het werd pas aangemaakt.
+
+		CafebezoekLijst.toevoegen(this);  ---> moet deze cafe pas niet toegevoegd worden wanneer het ook zijn einddatum weet?
+		}
+
+		 */
+
 		Cafebezoek cafebezoek1 = new Cafebezoek(cafe1);
+
+
 	}
 	
 	public void toonAantalMinutenBezoekInPeriode()

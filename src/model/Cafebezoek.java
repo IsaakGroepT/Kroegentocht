@@ -12,7 +12,11 @@ public class Cafebezoek extends DatumTijd {
 	private int aantalConsumpties;
 	private Cafe cafe;
 	private boolean isInCafe = false;
-	
+
+	public  void setCafe(Cafe cafe) {
+		this.cafe = cafe;
+	}
+
 	/**
 	 * 
 	 * @param cafe 
@@ -25,6 +29,7 @@ public class Cafebezoek extends DatumTijd {
 		isInCafe = true;
 
 		CafebezoekLijst.toevoegen(this);
+
 	}
 	
 	/**

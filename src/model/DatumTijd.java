@@ -26,7 +26,7 @@ public class DatumTijd {
 	/**
 	 * 
 	 */
-	protected void eindeBezoek()
+	public void eindeBezoek()
 	{
 		eindTijd = new Date();
 	}
