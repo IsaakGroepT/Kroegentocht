@@ -30,4 +30,31 @@ public class CafeLijst {
 	{
 		return cafes;
 	}
+
+	public static Cafe getCafeUitLijst(String cafeNaam){
+		Cafe cafe = null;
+		for (Cafe c : cafes){
+			if (cafeNaam.equals(c.getCafeNaam())){
+				cafe = c;
+
+			}
+		}
+		return cafe;
+	}
+
+	public static ArrayList<String> getCafeNamen() {
+		ArrayList<String> cafeLijst = new ArrayList<>();
+
+		if (cafes.size() != 0) {
+			for(Cafe c : cafes){
+				cafeLijst.add(c.getCafeNaam());
+			}
+
+
+		}
+
+		return cafeLijst;
+
+
+	}
 }

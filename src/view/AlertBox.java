@@ -20,10 +20,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Cafe;
-import model.CafeLijst;
-import model.CafeSoort;
-import model.Cafebezoek;
+import model.*;
 
 /**
  *
@@ -85,19 +82,18 @@ public class AlertBox {
 		gridPaneel.add(btnToevoegen, 3, 4);
 		btnToevoegen.setOnAction((ActionEvent e) ->
 		{
-			/*Adres cafeAdres = new Adres();
+			Adres cafeAdres = new Adres();
 			cafeAdres.setStreet(txtFieldCafeAdres.getText());
 			new Cafe(txtFieldCafeNaam.getText(), cafeAdres, cmboxCafeSoort.getValue());
 
-			alert.show();*/
+			alert.show();
 		});
 
 		Button btnExit = new Button("Close");
 		hBtn.getChildren().add(btnExit);
 		btnExit.setOnAction((ActionEvent e) ->
-		{
-			scherm.close();
-		});
+			scherm.close()
+		);
 		gridPaneel.add(btnExit, 4, 4);
 
 		// GridPane ipv gridPaneel want is statische methode, gridPaneel is een geïnstantieerd object
@@ -132,12 +128,17 @@ public class AlertBox {
 
 		// Lijst van cafés toevoegen aan de combobox
 		ComboBox<String> cmboxCafes = new ComboBox<>();
-		
+
+		/*
 		for (int n = 0; n < CafeLijst.getCafes().size(); n++)
 		{
-			// TODO: hoe weet de combobox de index (of reference) van het cafe object
+			// TODO: Deze
 			cmboxCafes.getItems().add(CafeLijst.getCafes().get(n).getCafeNaam());
-		}
+		}*/
+		// TODO: Hieronder een verkorte methode om de lijst te weergeven:
+		cmboxCafes.getItems().setAll(CafeLijst.getCafeNamen());
+
+
 		gridPaneel.add(cmboxCafes, 2, 3);
 
 		Button btnGo = new Button("GO!");
@@ -157,6 +158,7 @@ public class AlertBox {
 
 		Scene cafeKiezen = new Scene(gridPaneel);
 		scherm.setScene(cafeKiezen);
+		cafeKiezen.getStylesheets().add(StartGUI.class.getResource("Kroegentocht.css").toExternalForm());
 		scherm.show();
 	}
 	
@@ -191,25 +193,25 @@ public class AlertBox {
 		gridPaneel.add(timerField, 2, 2);
 
 		Label lblAantalConsumpties = new Label(); //observable.
-		//aantalConsumptiesLabel.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
+		lblAantalConsumpties.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
 		gridPaneel.add(lblAantalConsumpties, 3, 3);
 		Button btnDrink = new Button("+1");
 		btnDrink.setId("drink-button");
 		btnDrink.setShape(new Circle(30));
 		btnDrink.setOnAction((ActionEvent e) ->
 		{
-			//cafebezoek.verhoogAantalConsumpties();
-			//lblAantalConsumpties.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
+			cafebezoek.verhoogAantalConsumpties();
+			lblAantalConsumpties.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
 		});
 		gridPaneel.add(btnDrink, 1, 3);
 
 		Button btnStopDrinken = new Button("STOP");
 		btnStopDrinken.setOnAction((ActionEvent e) ->
 		{
-			/*cafebezoek.eindeBezoek();
+			cafebezoek.eindeVanCafebezoek();
 			AlertBox.eindeBezoekScene("STATS", cafebezoek.getBeginTijd(), cafebezoek.getEindTijd(), cafebezoek.getTotaleTijdVanBezoek(),cafebezoek.getAantalConsumpties());
 			CafebezoekLijst.toevoegen(cafebezoek);
-			scherm.close();*/
+			scherm.close();
 		});
 		gridPaneel.add(btnStopDrinken,4,5);
 
