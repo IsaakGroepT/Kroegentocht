@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
-import java.util.Date;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -21,14 +16,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.*;
-<<<<<<< HEAD
 import org.joda.time.DateTime;
-=======
->>>>>>> origin/master
 
 /**
- *
- * @author Isaak
+ * @Autor: Isaak Malik, Michal Mytkowski
+ * @Team: Team29
+ * @Date: 25/10/2015
+ * @Project: KroegenTocht
+ * @Purpose: GUI interface
  */
 public class AlertBox {
 
@@ -87,7 +82,6 @@ public class AlertBox {
 		{
 			Adres cafeAdres = new Adres();
 			cafeAdres.setStreet(txtFieldCafeAdres.getText());
-<<<<<<< HEAD
 			// TODO: setcity en setnumber
 			// TODO: validatie van input via log4j. Als sommige gegevens niet zijn ingevuld,
 			// dan geeft het een algemene error maar de log zegt de details
@@ -95,21 +89,11 @@ public class AlertBox {
 				cmboxCafeSoort.getValue());
 
 			Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cafe is toegevoegd " + CafeLijst.getCafeNamen().toString(), ButtonType.OK);
-=======
-			new Cafe(txtFieldCafeNaam.getText(), cafeAdres, cmboxCafeSoort.getValue());
-
->>>>>>> origin/master
 			alert.show();
 		});
 
 		Button btnExit = new Button("Close");
 		hBtn.getChildren().add(btnExit);
-<<<<<<< HEAD
-=======
-		btnExit.setOnAction((ActionEvent e) ->
-			scherm.close()
-		);
->>>>>>> origin/master
 		gridPaneel.add(btnExit, 4, 4);
 		btnExit.setOnAction(e -> scherm.close());
 
@@ -145,23 +129,9 @@ public class AlertBox {
 
 		// Lijst van cafés toevoegen aan de combobox
 		ComboBox<String> cmboxCafes = new ComboBox<>();
-<<<<<<< HEAD
 		// TODO: toon naam van cafe + adresgegevens ipv enkel de naam,
 		// zo voorkomen we cafes die dezelfde naam hebben maar andere adressen hebben
 		cmboxCafes.getItems().setAll(CafeLijst.getCafeNamen());
-=======
-
-		/*
-		for (int n = 0; n < CafeLijst.getCafes().size(); n++)
-		{
-			// TODO: Deze
-			cmboxCafes.getItems().add(CafeLijst.getCafes().get(n).getCafeNaam());
-		}*/
-		// TODO: Hieronder een verkorte methode om de lijst te weergeven:
-		cmboxCafes.getItems().setAll(CafeLijst.getCafeNamen());
-
-
->>>>>>> origin/master
 		gridPaneel.add(cmboxCafes, 2, 3);
 
 		Button btnGo = new Button("GO!");
@@ -225,11 +195,8 @@ public class AlertBox {
 		btnDrink.setOnAction((ActionEvent e) ->
 		{
 			cafebezoek.verhoogAantalConsumpties();
-<<<<<<< HEAD
 			//System.out.println(cafebezoek.getAantalConsumpties());
 			// TODO: bug: vanaf 10 is er een fout bij het tonen
-=======
->>>>>>> origin/master
 			lblAantalConsumpties.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
 		});
 		gridPaneel.add(btnDrink, 1, 3);
