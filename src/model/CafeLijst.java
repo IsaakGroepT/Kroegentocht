@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * @Autor: Isaak Malik, Michal Mytkowski
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 public class CafeLijst {
 
 	private static ArrayList<Cafe> cafes = new ArrayList<>();
+	private static final Logger logger = LogManager.getLogger("Kroegentocht");
 	
 	/**
 	 * 
@@ -38,6 +41,11 @@ public class CafeLijst {
 	public static ArrayList<String> getCafeNamen()
 	{
 		ArrayList<String> cafeLijst = new ArrayList<>();
+		
+		if (cafes.size() < 0)
+		{
+			logger.warn("methode CafeLijst.getCafeNamen(): variabele cafes is leeg");
+		}
 
 		for(Cafe c : cafes)
 		{
@@ -55,6 +63,11 @@ public class CafeLijst {
 	public static Cafe getCafeUitLijst(String cafeNaam)
 	{
 		Cafe cafe = null;
+		
+		if (cafes.size() < 0)
+		{
+			logger.warn("methode CafeLijst.getCafeUitLijst(): variabele cafes is leeg");
+		}
 		
 		for (Cafe c : cafes)
 		{

@@ -104,6 +104,4 @@ public class CafebezoekTest {
 	{
 		assertEquals(3, CafebezoekenStatistieken.totaalAantal());
 	}
-	
-	// TODO: CafebezoekenStatistieken methoden testen
 }

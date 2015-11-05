@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * @Autor: Isaak Malik, Michal Mytkowski
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 public class CafebezoekLijst {
 
 	protected static ArrayList<Cafebezoek> cafebezoeken = new ArrayList<>();
+	private static final Logger logger = LogManager.getLogger("Kroegentocht");
 	
 	/**
 	 * 
@@ -20,6 +23,7 @@ public class CafebezoekLijst {
 	public static void toevoegen(Cafebezoek cafebezoek)
 	{
 		cafebezoeken.add(cafebezoek);
+		logger.debug("Er is nog een cafebezoek toegevoegd aan de lijst");
 	}
 	
 	/**

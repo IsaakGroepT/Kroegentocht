@@ -16,6 +16,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.*;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 
 /**
@@ -27,6 +29,8 @@ import org.joda.time.DateTime;
  */
 public class AlertBox {
 
+	private static final Logger logger = LogManager.getLogger("Kroegentocht");
+	
 	/**
 	 * 
 	 * @param titel
@@ -195,6 +199,7 @@ public class AlertBox {
 		btnDrink.setOnAction((ActionEvent e) ->
 		{
 			cafebezoek.verhoogAantalConsumpties();
+			logger.info("Er is nog een zuip toegevoegd");
 			//System.out.println(cafebezoek.getAantalConsumpties());
 			// TODO: bug: vanaf 10 is er een fout bij het tonen
 			lblAantalConsumpties.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
@@ -206,7 +211,6 @@ public class AlertBox {
 		{
 			cafebezoek.eindeVanCafebezoek();
 			AlertBox.eindeBezoekScene("STATS", cafebezoek.getBeginTijd(), cafebezoek.getEindTijd(), cafebezoek.getTotaleTijdVanBezoek(),cafebezoek.getAantalConsumpties());
-			CafebezoekLijst.toevoegen(cafebezoek);
 			scherm.close();
 		});
 		gridPaneel.add(btnStopDrinken,4,5);

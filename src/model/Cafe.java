@@ -1,5 +1,8 @@
 package model;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 /**
  * @Autor: Isaak Malik, Michal Mytkowski
  * @Team: Team29
@@ -12,6 +15,7 @@ public class Cafe {
 	private Adres cafeAdres;
 	private CafeSoort cafeSoort;
 	private String cafeNaam;
+	private static final Logger logger = LogManager.getLogger("Kroegentocht");
 	
 	/**
 	 * Constructor
@@ -28,6 +32,8 @@ public class Cafe {
 		
 		//Toevoegen aan lijst
 		CafeLijst.toevoegen(this);
+		logger.debug("Café toegevoegd: \033[1m" + cafeNaam + "\033[0m met adres:" +
+			"\033[1m" + this.toString() + "\033[0m");
 	}
 	
 	/**
@@ -82,5 +88,12 @@ public class Cafe {
 	public void setCafeNaam(String cafeNaam)
 	{
 		this.cafeNaam = cafeNaam;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return String.format("%s %s, %s", cafeAdres.getStreet(), 
+			cafeAdres.getNumber(), cafeAdres.getCity());
 	}
 }
