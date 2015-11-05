@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -323,12 +324,12 @@ public class AlertBox {
 		
 		VBox vBox2 = new VBox(10);
 		
-		PieChart chart = new PieChart();
+		/* Onzen PI sjart */
 		
+		PieChart pieChart = new PieChart();
+		pieChart.setData(getCafesEnConsumpties());
 		
-		
-		vBox2.getChildren().addAll(chart);
-		
+		vBox2.getChildren().addAll(pieChart);
 		gridPaneel2.getChildren().addAll(vBox2);
 		
 		/* Tabel */
@@ -376,6 +377,19 @@ public class AlertBox {
 		return cafes;
 	}
 
+	/**
+	 * Get alle Cafés
+	 * @return 
+	 */
+	public static ObservableList<Data> getCafesEnConsumpties()
+	{
+		ObservableList<Data> cafeEnConsumpties = FXCollections.observableArrayList();
+		cafeEnConsumpties.addAll(new PieChart.Data("Cafe Michal: 5", 5), 
+			new PieChart.Data("Cafe isaak: 25", 25), new PieChart.Data("jos concurrent: 5", 5));
+		
+		return cafeEnConsumpties;
+	}
+	
 	/**
 	 * 
 	 * @param title
