@@ -107,6 +107,13 @@ public class AlertBox {
 		
 		btnToevoegen.setOnAction((ActionEvent e) ->
 		{
+			if (txtFieldCafeNaam.getText().equals("") || txtFieldCafeAdres.getText().equals("") ||
+				txtFieldCafePostcode.getText().equals("") || txtFieldCafeStad.getText().equals("") ||
+				cmboxCafeSoort.getValue() == null)
+			{
+				logger.error("Niet alle velden van het café zijn ingevuld!");
+				return;
+			}
 			Adres cafeAdres = new Adres();
 			cafeAdres.setStreet(txtFieldCafeAdres.getText());
 			cafeAdres.setPostcode(txtFieldCafePostcode.getText());
