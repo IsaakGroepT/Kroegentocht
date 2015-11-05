@@ -1,6 +1,7 @@
 
 package view;
 
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,7 +57,7 @@ public class AlertBox {
 		gridPaneel.setHgap(10);
 		gridPaneel.setPadding(new Insets(20, 20, 20, 20));
 
-		Text sceneTitle = new Text("Voer de gegevens van het café in");
+		Text sceneTitle = new Text("Voer de gegevens van het cafe in");
 		sceneTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		gridPaneel.add(sceneTitle, 0, 0, 2, 1);
 
@@ -198,7 +199,7 @@ public class AlertBox {
 	 * @param cafeNaam
 	 * @param cafe 
 	 */
-	public  static void cafebezoekScene(String title, String cafeNaam, Cafe cafe)
+	public static void cafebezoekScene(String title, String cafeNaam, Cafe cafe)
 	{
 		Cafebezoek cafebezoek = new Cafebezoek(cafe);
 		Stage scherm = new Stage();
@@ -304,33 +305,30 @@ public class AlertBox {
 		gridPaneel.setVgap(10);
 		gridPaneel.setHgap(10);
 		gridPaneel.setPadding(new Insets(20, 20, 20, 20));
+		
+		/* Tabel */
 
 		TableView<Cafebezoek> statistiekenTabel;
 		VBox vBox = new VBox(10);
 
-
-		//nameColumn
-		TableColumn<Cafebezoek,String> cafeNaam = new TableColumn<>("Cafe naam");
+		TableColumn cafeNaam = new TableColumn("Cafe naam");
+		TableColumn datumBezoek = new TableColumn("Datum bezoek");
+		TableColumn tijdOpCafe = new TableColumn("Duur van cafebezoek");
+		TableColumn aantalConsumpties = new TableColumn("Aantal consumpties");
+		
 		cafeNaam.setMinWidth(200);
-		cafeNaam.setCellValueFactory(new PropertyValueFactory<>("cafeNaam"));
-
-		TableColumn<Cafebezoek,DateTime> datumBezoek = new TableColumn<>("Datum bezoek");
 		datumBezoek.setMinWidth(200);
-		datumBezoek.setCellValueFactory(new PropertyValueFactory<>("beginTijd"));
-
-		TableColumn<Cafebezoek,String> tijdOpCafe = new TableColumn<>("Duur van cafebezoek");
 		tijdOpCafe.setMinWidth(200);
-		tijdOpCafe.setCellValueFactory(new PropertyValueFactory<>("tijd"));
-
-		TableColumn<Cafebezoek,Integer> aantalConsumpties = new TableColumn<>("Aantal consumpties");
 		aantalConsumpties.setMinWidth(200);
+		
+		cafeNaam.setCellValueFactory(new PropertyValueFactory<>("cafeNaam"));
+		datumBezoek.setCellValueFactory(new PropertyValueFactory<>("beginTijdString"));
+		tijdOpCafe.setCellValueFactory(new PropertyValueFactory<>("totaleTijdString"));
 		aantalConsumpties.setCellValueFactory(new PropertyValueFactory<>("aantalConsumpties"));
-
 
 		statistiekenTabel = new TableView<>();
 		statistiekenTabel.setItems(getCafesInTabel());
 		statistiekenTabel.getColumns().addAll(cafeNaam, datumBezoek, tijdOpCafe, aantalConsumpties);
-
 
 		Button btnExit = new Button ("Close");
 		btnExit.setOnAction((ActionEvent e ) -> scherm.close());
@@ -350,9 +348,9 @@ public class AlertBox {
 	{
 		ObservableList<Cafebezoek> cafes = FXCollections.observableArrayList();
 		cafes.setAll(CafebezoekLijst.getCafebezoeken());
+		
 		return cafes;
 	}
-
 
 	/**
 	 * 

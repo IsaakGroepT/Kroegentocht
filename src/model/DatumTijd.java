@@ -46,6 +46,15 @@ public class DatumTijd {
 	 * 
 	 * @return 
 	 */
+	public String getBeginTijdString()
+	{
+		return beginTijd.toString("dd/MM/YYYY hh:mm:ss");
+	}
+	
+	/**
+	 * 
+	 * @return 
+	 */
 	public DateTime getEindTijd()
 	{
 		return eindTijd;

@@ -35,6 +35,15 @@ public class Cafebezoek extends DatumTijd {
 	
 	/**
 	 * 
+	 * @return 
+	 */
+	public String getCafeNaam()
+	{
+		return cafe.getCafeNaam();
+	}
+	
+	/**
+	 * 
 	 * @return
 	 */
 	public int getAantalConsumpties()
