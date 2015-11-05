@@ -1,6 +1,6 @@
 # Kroegentocht
 
-Vereisten:<br><br>
+Vereisten:<br>
 
 Log4j 1.2<br>
 Joda-Time 2.9<br>
