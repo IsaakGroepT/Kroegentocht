@@ -1,8 +1,8 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import org.joda.time.DateTime;
 
 /**
  * @Autor: Isaak Malik, Michal Mytkowski
@@ -69,7 +69,7 @@ public class CafebezoekenStatistieken extends CafebezoekLijst {
 	 * @param maxDatum
 	 * @return
 	 */
-	public int aantalConsumptiesPerPeriode(Date minDatum, Date maxDatum)
+	public int aantalConsumptiesPerPeriode(DateTime minDatum, DateTime maxDatum)
 	{
 		int aantalConsumpties = 0;
 		
@@ -86,7 +86,7 @@ public class CafebezoekenStatistieken extends CafebezoekLijst {
 	 * @param maxDatum
 	 * @return
 	 */
-	public int aantalMinutenVolgensPeriode(Date minDatum, Date maxDatum)
+	public int aantalMinutenVolgensPeriode(DateTime minDatum, DateTime maxDatum)
 	{
 		int tijd = 0;
 		
@@ -103,14 +103,14 @@ public class CafebezoekenStatistieken extends CafebezoekLijst {
 	 * @param maxDatum
 	 * @return
 	 */
-	public ArrayList<Cafebezoek> aantalCafebezoekenVolgensPeriode(Date minDatum, Date maxDatum)
+	public ArrayList<Cafebezoek> aantalCafebezoekenVolgensPeriode(DateTime minDatum, DateTime maxDatum)
 	{
 		ArrayList<Cafebezoek> gefilterdeCafebezoeken = new ArrayList<Cafebezoek>();
 		
 		for (int n = 0; n < cafebezoeken.size(); n++)
 		{
-			if (cafebezoeken.get(n).getBeginTijd().after(minDatum) && 
-					cafebezoeken.get(n).getEindTijd().before(maxDatum))
+			if (cafebezoeken.get(n).getBeginTijd().isAfter(minDatum) && 
+					cafebezoeken.get(n).getEindTijd().isBefore(maxDatum))
 			{
 				gefilterdeCafebezoeken.add(cafebezoeken.get(n));
 			}

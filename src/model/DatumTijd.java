@@ -1,8 +1,9 @@
 
 package model;
 
-import java.util.Date;
-
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.Duration;
 /**
  * @Autor: Isaak Malik, Michal Mytkowski
  * @Team: Team29
@@ -12,15 +13,16 @@ import java.util.Date;
  */
 public class DatumTijd {
     
-	private Date beginTijd;
-	private Date eindTijd;
+	private DateTime beginTijd;
+	private DateTime eindTijd;
     
 	/**
 	 * 
 	 */
 	public DatumTijd()
 	{
-		beginTijd = new Date();
+		DateTimeZone.setDefault(DateTimeZone.forID("Europe/Brussels"));
+		beginTijd = new DateTime();
 	}
     
 	/**
@@ -28,14 +30,14 @@ public class DatumTijd {
 	 */
 	protected void eindeBezoek()
 	{
-		eindTijd = new Date();
+		eindTijd = new DateTime();
 	}
 	
 	/**
 	 * 
 	 * @return 
 	 */
-	public Date getBeginTijd()
+	public DateTime getBeginTijd()
 	{
 		return beginTijd;
 	}
@@ -44,17 +46,18 @@ public class DatumTijd {
 	 * 
 	 * @return 
 	 */
-	public Date getEindTijd()
+	public DateTime getEindTijd()
 	{
 		return eindTijd;
 	}
 
 	/**
-	 * 
+	 * Totale tijd van bezoek in minuten
 	 * @return 
 	 */
 	public long getTotaleTijdVanBezoek()
 	{
-		return eindTijd.getTime() - beginTijd.getTime();
+		Duration duur = new Duration(beginTijd, eindTijd);
+		return duur.getStandardMinutes();
 	}
 }

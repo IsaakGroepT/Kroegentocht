@@ -20,10 +20,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Cafe;
-import model.CafeLijst;
-import model.CafeSoort;
-import model.Cafebezoek;
+import model.*;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -38,7 +36,6 @@ public class AlertBox {
 	 */
 	public static void displayCafeToevoegenScene(String titel, String bericht)
 	{
-		Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cafe is toegevoegd", ButtonType.OK);
 		Stage scherm = new Stage();
 		scherm.initModality(Modality.APPLICATION_MODAL);
 		scherm.setTitle(titel);
@@ -83,22 +80,24 @@ public class AlertBox {
 		hBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		hBtn.getChildren().add(btnToevoegen);
 		gridPaneel.add(btnToevoegen, 3, 4);
-		btnToevoegen.setOnAction((ActionEvent e) ->
+		btnToevoegen.setOnAction(e ->
 		{
-			/*Adres cafeAdres = new Adres();
+			Adres cafeAdres = new Adres();
 			cafeAdres.setStreet(txtFieldCafeAdres.getText());
-			new Cafe(txtFieldCafeNaam.getText(), cafeAdres, cmboxCafeSoort.getValue());
+			// TODO: setcity en setnumber
+			// TODO: validatie van input via log4j. Als sommige gegevens niet zijn ingevuld,
+			// dan geeft het een algemene error maar de log zegt de details
+			new Cafe(txtFieldCafeNaam.getText(), cafeAdres, 
+				cmboxCafeSoort.getValue());
 
-			alert.show();*/
+			Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cafe is toegevoegd " + CafeLijst.getCafeNamen().toString(), ButtonType.OK);
+			alert.show();
 		});
 
 		Button btnExit = new Button("Close");
 		hBtn.getChildren().add(btnExit);
-		btnExit.setOnAction((ActionEvent e) ->
-		{
-			scherm.close();
-		});
 		gridPaneel.add(btnExit, 4, 4);
+		btnExit.setOnAction(e -> scherm.close());
 
 		// GridPane ipv gridPaneel want is statische methode, gridPaneel is een geïnstantieerd object
 		GridPane.setHalignment(lblNaam, HPos.RIGHT);
@@ -132,12 +131,9 @@ public class AlertBox {
 
 		// Lijst van cafés toevoegen aan de combobox
 		ComboBox<String> cmboxCafes = new ComboBox<>();
-		
-		for (int n = 0; n < CafeLijst.getCafes().size(); n++)
-		{
-			// TODO: hoe weet de combobox de index (of reference) van het cafe object
-			cmboxCafes.getItems().add(CafeLijst.getCafes().get(n).getCafeNaam());
-		}
+		// TODO: toon naam van cafe + adresgegevens ipv enkel de naam,
+		// zo voorkomen we cafes die dezelfde naam hebben maar andere adressen hebben
+		cmboxCafes.getItems().setAll(CafeLijst.getCafeNamen());
 		gridPaneel.add(cmboxCafes, 2, 3);
 
 		Button btnGo = new Button("GO!");
@@ -148,7 +144,7 @@ public class AlertBox {
 		 * Dit gaat methodes oproepen om de aangeduide string (cafe) uit de arraylist 
 		 * te halen als cafe object en deze meegeven met de actionButton.
 		 */
-		btnGo.setOnAction((ActionEvent e) ->
+		btnGo.setOnAction(e ->
 		{
 			String cafeNaam = cmboxCafes.getValue();
 			cafebezoekScene("Cafe Bezoek", cafeNaam, CafeLijst.getCafeUitLijst(cafeNaam));
@@ -157,6 +153,7 @@ public class AlertBox {
 
 		Scene cafeKiezen = new Scene(gridPaneel);
 		scherm.setScene(cafeKiezen);
+		cafeKiezen.getStylesheets().add(StartGUI.class.getResource("Kroegentocht.css").toExternalForm());
 		scherm.show();
 	}
 	
@@ -184,32 +181,35 @@ public class AlertBox {
 		txtCafeNaam.setId("cafe-naam");
 		gridPaneel.add(txtCafeNaam, 1, 0);
 
-		// Timer komt hier
-		Label timerField = new Label("00:01");
+		// Datum en tijd
+		String datumEnUur = cafebezoek.getBeginTijd().toString("dd/MM/YYYY hh:mm:ss");
+		
+		Label timerField = new Label("Start bezoek op: " + datumEnUur);
 		timerField.setId("Timer");
-
 		gridPaneel.add(timerField, 2, 2);
 
 		Label lblAantalConsumpties = new Label(); //observable.
-		//aantalConsumptiesLabel.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
+		lblAantalConsumpties.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
 		gridPaneel.add(lblAantalConsumpties, 3, 3);
 		Button btnDrink = new Button("+1");
 		btnDrink.setId("drink-button");
 		btnDrink.setShape(new Circle(30));
 		btnDrink.setOnAction((ActionEvent e) ->
 		{
-			//cafebezoek.verhoogAantalConsumpties();
-			//lblAantalConsumpties.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
+			cafebezoek.verhoogAantalConsumpties();
+			//System.out.println(cafebezoek.getAantalConsumpties());
+			// TODO: bug: vanaf 10 is er een fout bij het tonen
+			lblAantalConsumpties.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
 		});
 		gridPaneel.add(btnDrink, 1, 3);
 
 		Button btnStopDrinken = new Button("STOP");
-		btnStopDrinken.setOnAction((ActionEvent e) ->
+		btnStopDrinken.setOnAction(e ->
 		{
-			/*cafebezoek.eindeBezoek();
+			cafebezoek.eindeVanCafebezoek();
 			AlertBox.eindeBezoekScene("STATS", cafebezoek.getBeginTijd(), cafebezoek.getEindTijd(), cafebezoek.getTotaleTijdVanBezoek(),cafebezoek.getAantalConsumpties());
 			CafebezoekLijst.toevoegen(cafebezoek);
-			scherm.close();*/
+			scherm.close();
 		});
 		gridPaneel.add(btnStopDrinken,4,5);
 
@@ -226,8 +226,8 @@ public class AlertBox {
 	 * @param totaleTijd
 	 * @param totaalAantalConsumpties 
 	 */
-	public static void eindeBezoekScene(String title, Date beginTijd, Date eindTijd, 
-		double totaleTijd, int totaalAantalConsumpties)
+	public static void eindeBezoekScene(String title, DateTime beginTijd, DateTime eindTijd, 
+		long totaleTijd, int totaalAantalConsumpties)
 	{
 		Stage scherm = new Stage();
 		scherm.initModality(Modality.APPLICATION_MODAL);
@@ -245,21 +245,23 @@ public class AlertBox {
 		Label lblBegin = new Label("Begin tijd: ");
 		gridPaneel.add(lblBegin, 0, 1);
 		
-		Label lblBeginTijd = new Label(beginTijd.toString());
+		Label lblBeginTijd = new Label(beginTijd.toString("dd/MM/YYYY hh:mm:ss"));
 		lblBeginTijd.setId("statsLabel");
 		gridPaneel.add(lblBeginTijd, 1, 1);
 
 		Label lblEinde = new Label("Eind tijd: ");
 		gridPaneel.add(lblEinde, 0, 2);
 		
-		Label lblEindTijd = new Label(eindTijd.toString());
+		Label lblEindTijd = new Label(eindTijd.toString("dd/MM/YYYY hh:mm:ss"));
 		lblEindTijd.setId("statsLabel");
 		gridPaneel.add(lblEindTijd, 1, 2);
 
 		Label lblTotaal = new Label("Totale tijd: ");
 		gridPaneel.add(lblTotaal, 0, 3);
 		
-		Label lblTotaleTijd = new Label(Double.toString(totaleTijd));
+		// Aantal minuten bezoek
+		Label lblTotaleTijd = new Label();
+		lblTotaleTijd.setText(totaleTijd < 1 ? "Minder dan een minuut" : "+/- " + totaleTijd + " minu(u)t(en)");
 		lblEindTijd.setId("statsLabel");
 		gridPaneel.add(lblTotaleTijd, 1, 3);
 
@@ -272,7 +274,7 @@ public class AlertBox {
 
 		Button btnOk = new Button("OK");
 		btnOk.setAlignment(Pos.BOTTOM_RIGHT);
-		btnOk.setOnAction((ActionEvent e) ->
+		btnOk.setOnAction(e ->
 		{
 			scherm.close();
 		});
