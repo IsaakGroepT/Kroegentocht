@@ -1,7 +1,6 @@
 
 package view;
 
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,6 +8,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -112,6 +112,12 @@ public class AlertBox {
 				txtFieldCafePostcode.getText().equals("") || txtFieldCafeStad.getText().equals("") ||
 				cmboxCafeSoort.getValue() == null)
 			{
+				Alert alert2 = new Alert(Alert.AlertType.ERROR, "Niet alle velden van het café zijn ingevuld!", ButtonType.OK);
+				alert2.setHeaderText("Er is een probleem!");
+				
+				Image image = new Image("view/resources/giphy.gif");
+				alert2.setGraphic(new ImageView(image));
+				alert2.show();
 				logger.error("Niet alle velden van het café zijn ingevuld!");
 				return;
 			}
@@ -306,6 +312,25 @@ public class AlertBox {
 		gridPaneel.setHgap(10);
 		gridPaneel.setPadding(new Insets(20, 20, 20, 20));
 		
+		/* Pie charts */
+		
+		
+		GridPane gridPaneel2 = new GridPane();
+		gridPaneel2.setAlignment(Pos.TOP_CENTER);
+		gridPaneel.setVgap(10);
+		gridPaneel.setHgap(10);
+		gridPaneel.setPadding(new Insets(20, 20, 20, 20));
+		
+		VBox vBox2 = new VBox(10);
+		
+		PieChart chart = new PieChart();
+		
+		
+		
+		vBox2.getChildren().addAll(chart);
+		
+		gridPaneel2.getChildren().addAll(vBox2);
+		
 		/* Tabel */
 
 		TableView<Cafebezoek> statistiekenTabel;
@@ -331,13 +356,12 @@ public class AlertBox {
 		statistiekenTabel.getColumns().addAll(cafeNaam, datumBezoek, tijdOpCafe, aantalConsumpties);
 
 		Button btnExit = new Button ("Close");
-		btnExit.setOnAction((ActionEvent e ) -> scherm.close());
+		btnExit.setOnAction(e -> scherm.close());
 
-		vBox.getChildren().addAll(statistiekenTabel, btnExit);
+		vBox.getChildren().addAll(gridPaneel2, statistiekenTabel, btnExit);
 		Scene scene = new Scene(vBox);
 		scherm.setScene(scene);
 		scherm.show();
-
 	}
 
 	/**
