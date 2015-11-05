@@ -58,6 +58,21 @@ public class DatumTijd {
 	public long getTotaleTijdVanBezoek()
 	{
 		Duration duur = new Duration(beginTijd, eindTijd);
-		return duur.getStandardMinutes();
+		return duur.getMillis();
+	}
+	
+	/**
+	 * 
+	 * @return 
+	 */
+	public String getTotaleTijdString()
+	{
+		long totaleTijd = getTotaleTijdVanBezoek();
+
+		long second = (totaleTijd / 1000) % 60;
+		long minute = (totaleTijd / (1000 * 60)) % 60;
+		long hour = (totaleTijd / (1000 * 60 * 60)) % 24;
+
+		return String.format("%02d:%02d:%02d", hour, minute, second);
 	}
 }

@@ -15,15 +15,39 @@
 -fx-font-weight: bold;
 -fx-text-fill: #333333;
 -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.5) , 0,0,0,1);
+    -fx-background-color: white;
+
 }
 
-#welkomTekst {
+#drinkButton{
+    -fx-background-color: lawngreen;
+    -fx-font-size: 14px;
+
+}
+
+#labels-cafebezoek{
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.vbox {
+
+    -fx-background-color: azure;
+    -fx-padding: 25px 25px 25px 25px ;
+
+}
+
+#welkomTekst, #cafe-naam{
 -fx-padding: 10px;
 -fx-text-fill: #FD784C;
 -fx-font-size: 25px;
 -fx-stroke: black;
 -fx-stroke-width: 1px;
+    -fx-border-color: black;
+    -fx-border-style: solid;
 }
+
+
 
 #statsLabel {
 -fx-text-fill: crimson;

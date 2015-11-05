@@ -68,27 +68,5 @@ public class KroegenTocht {
 		Cafe cafe5 = new Cafe("Club dodo", adres5, CafeSoort.CLUB);
 		
 		logger.info("De voorbeelden zijn ingesteld");
-		
-		//Cafebezoek bezoek1 = new Cafebezoek(cafe1);
-	}
-	
-	public void toonAantalMinutenBezoekInPeriode()
-	{
-		
-	}
-	
-	public int toonTotaalBezoeken()
-	{
-		return CafebezoekenStatistieken.totaalAantal();
-	}
-	
-	public void toonGemiddeldeConsumpties()
-	{
-		
-	}
-	
-	public void toonLangsteBezoek()
-	{
-		
 	}
 }

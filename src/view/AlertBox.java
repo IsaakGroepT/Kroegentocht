@@ -1,24 +1,31 @@
 
 package view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
+
+import model.*;
 
 /**
  * @Autor: Isaak Malik, Michal Mytkowski
@@ -38,10 +45,10 @@ public class AlertBox {
 	 */
 	public static void displayCafeToevoegenScene(String titel, String bericht)
 	{
+		Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cafe is toegevoegd", ButtonType.OK);
 		Stage scherm = new Stage();
 		scherm.initModality(Modality.APPLICATION_MODAL);
 		scherm.setTitle(titel);
-		scherm.setMinWidth(350);
 
 		GridPane gridPaneel = new GridPane();
 		gridPaneel.setAlignment(Pos.CENTER);
@@ -57,8 +64,12 @@ public class AlertBox {
 		gridPaneel.add(lblNaam, 0, 1);
 		Label lblAdres = new Label("_Address:");
 		gridPaneel.add(lblAdres, 0, 2);
+		Label lblNummer = new Label("_Nummer:");
+		gridPaneel.add(lblNummer, 0, 3);
+		Label lblStad = new Label("_Stad:");
+		gridPaneel.add(lblStad, 0, 4);
 		Label lblSoort = new Label("_Soort:");
-		gridPaneel.add(lblSoort, 0, 3);
+		gridPaneel.add(lblSoort, 0, 5);
 
 		TextField txtFieldCafeNaam = new TextField();
 		lblNaam.setLabelFor(txtFieldCafeNaam);
@@ -70,44 +81,59 @@ public class AlertBox {
 		lblAdres.setMnemonicParsing(true);
 		gridPaneel.add(txtFieldCafeAdres, 2, 2);
 
+		TextField txtFieldCafePostcode = new TextField();
+		lblNummer.setLabelFor(txtFieldCafePostcode);
+		lblNummer.setMnemonicParsing(true);
+		gridPaneel.add(txtFieldCafePostcode, 2, 3);
+
+		TextField txtFieldCafeStad = new TextField();
+		lblStad.setLabelFor(txtFieldCafeStad);
+		lblStad.setMnemonicParsing(true);
+		gridPaneel.add(txtFieldCafeStad, 2, 4);
+
 		ComboBox<CafeSoort> cmboxCafeSoort = new ComboBox<>();
 		cmboxCafeSoort.getItems().setAll(CafeSoort.values());
 		lblSoort.setLabelFor(cmboxCafeSoort);
 		lblSoort.setMnemonicParsing(true);
-		gridPaneel.add(cmboxCafeSoort, 2, 3);
+		gridPaneel.add(cmboxCafeSoort, 2, 5);
 
-		HBox hBtn = new HBox(10);
+		HBox hBtn = new HBox(2);
 
 		Button btnToevoegen = new Button("Toevoegen");
-		hBtn.setAlignment(Pos.BOTTOM_RIGHT);
+		//btnToevoegen.setMinWidth(300);
+		hBtn.setAlignment(Pos.BOTTOM_LEFT);
 		hBtn.getChildren().add(btnToevoegen);
-		gridPaneel.add(btnToevoegen, 3, 4);
-		btnToevoegen.setOnAction(e ->
+		gridPaneel.add(btnToevoegen, 1, 6);
+		
+		btnToevoegen.setOnAction((ActionEvent e) ->
 		{
 			Adres cafeAdres = new Adres();
 			cafeAdres.setStreet(txtFieldCafeAdres.getText());
-			// TODO: setcity en setnumber
-			// TODO: validatie van input via log4j. Als sommige gegevens niet zijn ingevuld,
-			// dan geeft het een algemene error maar de log zegt de details
-			new Cafe(txtFieldCafeNaam.getText(), cafeAdres, 
-				cmboxCafeSoort.getValue());
+			cafeAdres.setPostcode(txtFieldCafePostcode.getText());
+			cafeAdres.setCity(txtFieldCafeStad.getText());
+			// De café wordt in de constructor aan de static array toegevoegd
+			new Cafe(txtFieldCafeNaam.getText(), cafeAdres, cmboxCafeSoort.getValue());
 
-			Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cafe is toegevoegd " + CafeLijst.getCafeNamen().toString(), ButtonType.OK);
 			alert.show();
 		});
 
 		Button btnExit = new Button("Close");
 		hBtn.getChildren().add(btnExit);
-		gridPaneel.add(btnExit, 4, 4);
+		gridPaneel.add(btnExit, 2, 6);
 		btnExit.setOnAction(e -> scherm.close());
 
-		// GridPane ipv gridPaneel want is statische methode, gridPaneel is een geïnstantieerd object
+		/*
+		 * GridPane ipv gridPaneel want is statische methode, gridPaneel is een 
+		 * geïnstantieerd object
+		 */
 		GridPane.setHalignment(lblNaam, HPos.RIGHT);
 		GridPane.setHalignment(lblAdres, HPos.RIGHT);
 		GridPane.setHalignment(lblSoort, HPos.RIGHT);
 
-		Scene toevoegenCafeScene = new Scene(gridPaneel);
+		Scene toevoegenCafeScene = new Scene(gridPaneel, 370, 420);
 		scherm.setScene(toevoegenCafeScene);
+		scherm.setResizable(false);
+		toevoegenCafeScene.getStylesheets().add(StartGUI.class.getResource("Kroegentocht.css").toExternalForm());
 		scherm.showAndWait();
 	}
 	
@@ -172,37 +198,65 @@ public class AlertBox {
 		scherm.initModality(Modality.APPLICATION_MODAL);
 
 		scherm.setTitle(title);
-		scherm.setMinWidth(350);
+		scherm.setMinWidth(200);
 		GridPane gridPaneel = new GridPane();
 		gridPaneel.setAlignment(Pos.CENTER);
 		gridPaneel.setPadding(new Insets(20, 20, 20, 20));
 		gridPaneel.setVgap(10);
 		gridPaneel.setHgap(10);
 
+
+		VBox vbox = new VBox(15);
+		vbox.setAlignment(Pos.CENTER);
+
 		Text txtCafeNaam = new Text(cafeNaam);
 		txtCafeNaam.setId("cafe-naam");
-		gridPaneel.add(txtCafeNaam, 1, 0);
+		//gridPaneel.add(txtCafeNaam, 1, 0);
 
 		// Datum en tijd
-		String datumEnUur = cafebezoek.getBeginTijd().toString("dd/MM/YYYY hh:mm:ss");
+		//String datumEnUur = cafebezoek.getBeginTijd().toString("dd/MM/YYYY hh:mm:ss");
 		
-		Label timerField = new Label("Start bezoek op: " + datumEnUur);
-		timerField.setId("Timer");
-		gridPaneel.add(timerField, 2, 2);
+		//Label timerField = new Label("Start bezoek op: " + datumEnUur);
+		//timerField.setId("Timer");
+		//gridPaneel.add(timerField, 2, 2);
+
+		Image imgAantalGedronken = new Image("view/resources/notDrunk.png",150,150,false,false);
+		Image imgAantalGedronken2 = new Image("view/resources/happy.png",150,150,false,false);
+		Image imgAantalGedronken3 = new Image("view/resources/drunk.png",150,150,false,false);
+
+		Label lblDrunkState = new Label("STATUS");
+		lblDrunkState.setId("labels-cafebezoek");
+		ImageView imageView = new ImageView();
+		imageView.setImage(imgAantalGedronken);
+		//gridPaneel.add(imageView,2,3);
+
+		Label lblAantalConsumptiesText = new Label("Aantal geconsumeerd:");
+		lblAantalConsumptiesText.setId("labels-cafebezoek");
+		//gridPaneel.add(lblAantalConsumptiesText,0,2);
 
 		Label lblAantalConsumpties = new Label(); //observable.
+		lblAantalConsumpties.setId("labels-cafebezoek");
 		lblAantalConsumpties.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
-		gridPaneel.add(lblAantalConsumpties, 3, 3);
+		gridPaneel.add(lblAantalConsumpties, 1, 2);
 		Button btnDrink = new Button("+1");
+		btnDrink.setId("drinkButton");
 		btnDrink.setId("drink-button");
-		btnDrink.setShape(new Circle(30));
+		btnDrink.setShape(new Circle(200.00));
 		btnDrink.setOnAction((ActionEvent e) ->
 		{
 			cafebezoek.verhoogAantalConsumpties();
 			logger.info("Er is nog een zuip toegevoegd");
-			//System.out.println(cafebezoek.getAantalConsumpties());
-			// TODO: bug: vanaf 10 is er een fout bij het tonen
 			lblAantalConsumpties.setText(Integer.toString(cafebezoek.getAantalConsumpties()));
+			
+			if (cafebezoek.getAantalConsumpties() > 3 && cafebezoek.getAantalConsumpties() < 6)
+			{
+				imageView.setImage(imgAantalGedronken2);
+			}
+			else if (cafebezoek.getAantalConsumpties() >= 6)
+			{
+				imageView.setImage(imgAantalGedronken3);
+			}
+
 		});
 		gridPaneel.add(btnDrink, 1, 3);
 
@@ -210,15 +264,88 @@ public class AlertBox {
 		btnStopDrinken.setOnAction(e ->
 		{
 			cafebezoek.eindeVanCafebezoek();
-			AlertBox.eindeBezoekScene("STATS", cafebezoek.getBeginTijd(), cafebezoek.getEindTijd(), cafebezoek.getTotaleTijdVanBezoek(),cafebezoek.getAantalConsumpties());
+			AlertBox.eindeBezoekScene("STATS", cafebezoek.getBeginTijd(), cafebezoek.getEindTijd(), 
+				cafebezoek.getTotaleTijdString(), cafebezoek.getAantalConsumpties());
 			scherm.close();
 		});
-		gridPaneel.add(btnStopDrinken,4,5);
+		//gridPaneel.add(btnStopDrinken,2,4);
 
+
+		vbox.getChildren().addAll(txtCafeNaam, lblDrunkState , imageView, lblAantalConsumptiesText,lblAantalConsumpties,btnDrink,btnStopDrinken);
+		gridPaneel.getChildren().setAll(vbox);
+		//gridPaneel.getChildren().add(imageView);
 		Scene sceneCafebezoek = new Scene(gridPaneel);
 		scherm.setScene(sceneCafebezoek);
+		sceneCafebezoek.getStylesheets().add(StartGUI.class.getResource("Kroegentocht.css").toExternalForm());
 		scherm.show();
 	}
+
+	/**
+	 * 
+	 * @param titel 
+	 */
+	public static void cafeStatistiekenScene(String titel)
+	{
+		Stage scherm = new Stage();
+		scherm.initModality(Modality.APPLICATION_MODAL);
+		scherm.setTitle(titel);
+		scherm.setMinWidth(350);
+		scherm.setMinHeight(400);
+
+		GridPane gridPaneel = new GridPane();
+		gridPaneel.setAlignment(Pos.CENTER);
+		gridPaneel.setVgap(10);
+		gridPaneel.setHgap(10);
+		gridPaneel.setPadding(new Insets(20, 20, 20, 20));
+
+		TableView<Cafebezoek> statistiekenTabel;
+		VBox vBox = new VBox(10);
+
+
+		//nameColumn
+		TableColumn<Cafebezoek,String> cafeNaam = new TableColumn<>("Cafe naam");
+		cafeNaam.setMinWidth(200);
+		cafeNaam.setCellValueFactory(new PropertyValueFactory<>("cafeNaam"));
+
+		TableColumn<Cafebezoek,DateTime> datumBezoek = new TableColumn<>("Datum bezoek");
+		datumBezoek.setMinWidth(200);
+		datumBezoek.setCellValueFactory(new PropertyValueFactory<>("beginTijd"));
+
+		TableColumn<Cafebezoek,String> tijdOpCafe = new TableColumn<>("Duur van cafebezoek");
+		tijdOpCafe.setMinWidth(200);
+		tijdOpCafe.setCellValueFactory(new PropertyValueFactory<>("tijd"));
+
+		TableColumn<Cafebezoek,Integer> aantalConsumpties = new TableColumn<>("Aantal consumpties");
+		aantalConsumpties.setMinWidth(200);
+		aantalConsumpties.setCellValueFactory(new PropertyValueFactory<>("aantalConsumpties"));
+
+
+		statistiekenTabel = new TableView<>();
+		statistiekenTabel.setItems(getCafesInTabel());
+		statistiekenTabel.getColumns().addAll(cafeNaam, datumBezoek, tijdOpCafe, aantalConsumpties);
+
+
+		Button btnExit = new Button ("Close");
+		btnExit.setOnAction((ActionEvent e ) -> scherm.close());
+
+		vBox.getChildren().addAll(statistiekenTabel, btnExit);
+		Scene scene = new Scene(vBox);
+		scherm.setScene(scene);
+		scherm.show();
+
+	}
+
+	/**
+	 * Get alle Cafés
+	 * @return 
+	 */
+	public static ObservableList<Cafebezoek> getCafesInTabel()
+	{
+		ObservableList<Cafebezoek> cafes = FXCollections.observableArrayList();
+		cafes.setAll(CafebezoekLijst.getCafebezoeken());
+		return cafes;
+	}
+
 
 	/**
 	 * 
@@ -229,7 +356,7 @@ public class AlertBox {
 	 * @param totaalAantalConsumpties 
 	 */
 	public static void eindeBezoekScene(String title, DateTime beginTijd, DateTime eindTijd, 
-		long totaleTijd, int totaalAantalConsumpties)
+		String totaleTijd, int totaalAantalConsumpties)
 	{
 		Stage scherm = new Stage();
 		scherm.initModality(Modality.APPLICATION_MODAL);
@@ -242,6 +369,7 @@ public class AlertBox {
 		gridPaneel.setPadding(new Insets(10));
 
 		Text statsText = new Text("STATS");
+		statsText.setId("welkomTekst");
 		gridPaneel.add(statsText, 0, 0);
 
 		Label lblBegin = new Label("Begin tijd: ");
@@ -262,8 +390,9 @@ public class AlertBox {
 		gridPaneel.add(lblTotaal, 0, 3);
 		
 		// Aantal minuten bezoek
-		Label lblTotaleTijd = new Label();
-		lblTotaleTijd.setText(totaleTijd < 1 ? "Minder dan een minuut" : "+/- " + totaleTijd + " minu(u)t(en)");
+		//Label lblTotaleTijd = new Label();
+		//lblTotaleTijd.setText(totaleTijd < 1 ? "Minder dan een minuut" : "+/- " + totaleTijd + " minu(u)t(en)");
+		Label lblTotaleTijd = new Label(totaleTijd);
 		lblEindTijd.setId("statsLabel");
 		gridPaneel.add(lblTotaleTijd, 1, 3);
 
@@ -284,6 +413,7 @@ public class AlertBox {
 
 		Scene statScene = new Scene(gridPaneel);
 		scherm.setScene(statScene);
+		statScene.getStylesheets().add(StartGUI.class.getResource("Kroegentocht.css").toExternalForm());
 		scherm.show();
 	}
 }

@@ -62,6 +62,7 @@ public class StartGUI extends Application {
 		Button btnStatistieken = new Button("Statistieken");
 		btnStatistieken.setMaxWidth(Double.MAX_VALUE);
 		GridPane.setConstraints(btnStatistieken, 2, 3);
+		btnStatistieken.setOnAction((ActionEvent e) -> AlertBox.cafeStatistiekenScene("Statistieken"));
 
 		// Exit knop
 		Button btnExit = new Button("Exit");
