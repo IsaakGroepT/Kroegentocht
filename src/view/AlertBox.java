@@ -313,25 +313,6 @@ public class AlertBox {
 		gridPaneel.setHgap(10);
 		gridPaneel.setPadding(new Insets(20, 20, 20, 20));
 		
-		/* Pie charts */
-		
-		
-		GridPane gridPaneel2 = new GridPane();
-		gridPaneel2.setAlignment(Pos.TOP_CENTER);
-		gridPaneel.setVgap(10);
-		gridPaneel.setHgap(10);
-		gridPaneel.setPadding(new Insets(20, 20, 20, 20));
-		
-		VBox vBox2 = new VBox(10);
-		
-		/* Onzen PI sjart */
-		
-		PieChart pieChart = new PieChart();
-		pieChart.setData(getCafesEnConsumpties());
-		
-		vBox2.getChildren().addAll(pieChart);
-		gridPaneel2.getChildren().addAll(vBox2);
-		
 		/* Tabel */
 
 		TableView<Cafebezoek> statistiekenTabel;
@@ -359,7 +340,7 @@ public class AlertBox {
 		Button btnExit = new Button ("Close");
 		btnExit.setOnAction(e -> scherm.close());
 
-		vBox.getChildren().addAll(gridPaneel2, statistiekenTabel, btnExit);
+		vBox.getChildren().addAll(statistiekenTabel, btnExit);
 		Scene scene = new Scene(vBox);
 		scherm.setScene(scene);
 		scherm.show();

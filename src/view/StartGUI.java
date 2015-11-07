@@ -59,7 +59,7 @@ public class StartGUI extends Application {
 		});
 
 		// Button naar --> Statistieken Scene
-		Button btnStatistieken = new Button("Statistieken");
+		Button btnStatistieken = new Button("Lijst Bezoeken");
 		btnStatistieken.setMaxWidth(Double.MAX_VALUE);
 		GridPane.setConstraints(btnStatistieken, 2, 3);
 		btnStatistieken.setOnAction((ActionEvent e) -> AlertBox.cafeStatistiekenScene("Statistieken"));
